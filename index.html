@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
-  <title></title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 
-    :root {
-    --color-bg-secondary: #e9e9e9;
-    --border-radius: 5px;
-}
+    <title>节约粮食</title>
+
+    <!-- 载入所有的组件资源 -->
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fullPage.js"></script>
+
+
+    <!-- H5对象：进行内容管理 -->
+
+    <script type="text/javascript" src="js/H5.js?t=6"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5.css" >
+
+    <script type="text/javascript" src="js/H5_loading.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5_loading.css" >
+
+    <script type="text/javascript" src="js/H5Content.js?t=19"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5Content.css?t=6" >
+
+    <style>
 
 input,
 label,
@@ -41,15 +50,15 @@ input[type="radio"]+label {
 input,
 select,
 textarea {
-    border: 1px solid var(--color-bg-secondary);
-    border-radius: var(--border-radius);
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
     margin-bottom: 1rem;
     padding: 0.4rem 0.8rem;
 }
 
 input[readonly],
 textarea[readonly] {
-    background-color: var(--color-bg-secondary);
+    background-color: #e9e9e9;
 }
 
 label {
@@ -57,61 +66,21 @@ label {
     margin-bottom: 0.2rem;
 }
 
-body {
-      overflow: hidden;
-      background-image: url('./assets/bg.JPG');
-  background-size: 100% 100%;
-  background-position: center;
-}
 
-
-    .root {
-      overflow-y: scroll;
+    .wenjuan {
       /* background-image: url('https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwys00sgj20h60uiwgo.jpg'); */
-      max-width: 900px;
-      height: 100vh;
-      margin: 0 auto;
-    }
-
-    .result {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      display: none;
-      overflow: hidden;
-      background-image: url('./assets/bg2.JPG');
-      /* background-image: url('https://wx3.sinaimg.cn/mw690/9f7ff7afly1gihwys1j8lj20h60uidig.jpg'); */
-      background-size: 100% 100%;
-      background-position: center;
-      padding: 25px;
       width: 100%;
       height: 100vh;
-      text-align: center;
-    }
-
-    .box {
-      overflow-y: scroll;
-      width: 100%;
-      height: 90vh;
-    }
-
-    .box-item h2 {
-      line-height: 4;
-    }
-
-    .box-item p {
-      padding: 25px;
-    }
-
-    .img {
       margin: 0 auto;
-      width: 70%;
+      background-image: url('./assets/bg.JPG');
+        background-size: 100% 100%;
+        background-position: center;
     }
+
 
     .title {
       width: 100%;
-      height: 55vh;
+      height: 45vh;
       /* background-color: rgba(0, 0, 0, 0.4); */
     }
 
@@ -167,97 +136,38 @@ body {
     .gender-box div.active::before {
       background-color: brown;
     }
-  </style>
-</head>
-<body>
-  <div class="root">
-    <div class="title"></div>
-    <div class="gender">
-      <span>性别</span>
-      <div class="gender-box">
-        <div id="girl" class="active">女</div>
-        <div id="boy">男</div>
-      </div>
-    </div>
-    <div class="name">
-      <span>姓名</span>
-      <input id="name" />
-    </div>
-    <div id="btn" class="btn">开始测试</div>
 
-    <div class="result" id="result">
-      <div id="box" class="box">
-        <div id="box-item" class="box-item"></div>
-        <div id="btn-cancel" class="btn btn-cancel">重新测试</div>
-      </div>
-    </div>
-  </div>
-  <script>
-    const data = [{
-      name: '玉米',
-      img: './assets/yumi.png',
-      // img: 'https://wx1.sinaimg.cn/mw690/9f7ff7afly1gihwysexomj20gy0jd75b.jpg',
-      description: '玉米是禾本科的一年生草本植物，分布于美国、中国、巴西和其他国家。玉米的物理性状由粒色、粒形、种皮光泽、粒长、粒宽、百粒重、粒径、籽粒均匀程度和硬实率等指标组成。',
-    }, {
-      name: '大豆',
-      img: './assets/dadou.png',
-      // img: 'https://wx2.sinaimg.cn/mw690/9f7ff7afly1gihwys5f3qj20i20i3t8z.jpg',
-      description: '大豆是一年生草本植物，是世界上最重要的豆类，大豆起源于中国。大豆一般都指其种子而言。根据大豆的种子种皮颜色和粒形分为五类：黄大豆、青大豆、黑大豆、其它大豆、饲料豆。',
-    }, {
-      name: '小麦',
-      img: './assets/xiaomai.png',
-      // img: 'https://wx1.sinaimg.cn/mw690/9f7ff7afly1gihwyscg12j20f10f43z4.jpg',
-      description: '小麦是小麦属植物的统称，代表种为普通小麦是禾本科植物，是一种在世界各地广泛种植的谷类作物，小麦的颖果是人类的主食之一，磨成面粉后可制作面包、馒头、饼干、面条等食物，发酵后可制成啤酒、酒精、白酒或生物质燃料。',
-    }, {
-      name: '芝麻',
-      img: './assets/zhima.png',
-      // img: 'https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwysgs7ij20gy0gydg2.jpg',
-      description: '芝麻，被称为八谷之冠。芝麻是一种油料作物，榨取的油称为麻油、胡麻油、香油，特点是气味醇香，生用热用皆可。它遍布世界上的热带地区以及部分温带地区。',
-    }, {
-      name: '绿豆',
-      img: './assets/lvdou.png',
-      // img: 'https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwys9zlpj20dw0dw0t5.jpg',
-      description: '绿豆是豆科植物绿豆的种子。种子和茎被广泛食用。绿豆清热之功在皮，解毒之功在肉。绿豆汤是家庭常备夏季清暑饮料，清暑开胃，老少皆宜。传统绿豆制品有绿豆糕、绿豆酒、绿豆饼、绿豆沙、绿豆粉皮等。',
-    }, {
-      name: '花生',
-      img: './assets/huasheng.png',
-      // img: 'https://wx2.sinaimg.cn/mw690/9f7ff7afly1gihwys8r3uj20dw0dpgm5.jpg',
-      description: '花生原名落花生，是我国产量丰富、食用广泛的一种坚果。属蔷薇目，豆科一年生草本植物，茎直立或匍匐，长30～80厘米，翼瓣与龙骨瓣分离，荚果长2～5厘米，宽1～1.3厘米，膨胀，荚厚，花果期6～8月。',
-    }]
-
-    const getId = id => document.getElementById(id)
-    const random = (max, min) => {
-      return Math.floor(Math.random() * (max - min) + min)
+    .h5_component_name_wenjuan {
+        width: 100%;
     }
+    </style>
+    
+    <body>
+        <div class="root">
+            <div class="loading">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+                <div id="rate">0%</div>
+            </div>
+        </div>
 
-    const getResult = (index, name) => {
-      const item = data[index]
-      const content = [
-        `<span>你好${name},下面是你的测试结果</span>`,
-        `<h2>${item.name}</h2>`,
-        `<image class="img" src="${item.img}" />`,
-        `<p>${item.description}</p>`,
-      ]
-      getId('box-item').innerHTML = content.join('')
-    }
-
-    getId('btn').onclick = function() {
-      const name = getId('name').value
-      if (name) {
-        getResult(random(0, data.length), name)
-        getId('result').setAttribute('style', 'display: block')
-      } else {
-        alert('请填写名字')
-      }
-    }
-
-    getId('btn-cancel').onclick = function() {
-      getId('box-item').innerHTML = ''
-      getId('name').value = ''
-      getId('girl').className = 'active'
-      getId('boy').className = ''
-      getId('result').setAttribute('style', 'display: none')
-    }
+        <!-- <div class="music-btn">
+            <img class="uniformlyRotating" src="./assets/musicIcon.png" alt="music" />
+        </div> -->
+        <script>
+            window.onload = function() {
+                const getId = id => document.getElementById(id)
+                const random = (max, min) => {
+                    return Math.floor(Math.random() * (max - min) + min)
+                }
+            getId('btn').onclick = function() {
+                const name = getId('name').value
+                if (name) {
+                    window.location.href = './result.html?index=' + random(0, 6) + '&name=' + name
+                } else {
+                    alert('请填写名字')
+                }
+            }
 
     getId('girl').onclick = function() {
       getId('girl').className = 'active'
@@ -268,6 +178,8 @@ body {
       getId('boy').className = 'active'
       getId('girl').className = ''
     }
-  </script>
-</body>
+            }
+        </script>
+    </body>
+
 </html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+    --color-bg-secondary: #e9e9e9;
+    --border-radius: 5px;
+}
+
+input,
+label,
+select,
+textarea {
+    display: block;
+    font-size: inherit;
+    width: 100%;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+}
+
+input[type="checkbox"]+label,
+input[type="radio"]+label {
+    display: inline-block;
+    font-weight: normal;
+    position: relative;
+    top: 1px;
+}
+
+input,
+select,
+textarea {
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.8rem;
+}
+
+input[readonly],
+textarea[readonly] {
+    background-color: #e9e9e9;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+body {
+      overflow: hidden;
+}
+
+    .result {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      overflow: hidden;
+      background-image: url('./assets/bg2.JPG');
+      /* background-image: url('https://wx3.sinaimg.cn/mw690/9f7ff7afly1gihwys1j8lj20h60uidig.jpg'); */
+      background-size: 100% 100%;
+      background-position: center;
+      padding: 25px;
+      width: 100%;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .box {
+      overflow-y: scroll;
+      width: 100%;
+      height: 90vh;
+    }
+
+    .box-item h2 {
+      line-height: 4;
+    }
+
+    .box-item p {
+      padding: 25px;
+    }
+
+    .img {
+      margin: 0 auto;
+      width: 70%;
+    }
+
+    .title {
+      width: 100%;
+      height: 55vh;
+      /* background-color: rgba(0, 0, 0, 0.4); */
+    }
+
+    .gender,
+    .name {
+      width: 70%;
+      margin: 12px auto;
+    }
+
+    .gender span,
+    .name span {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: bolder;
+      color:brown;
+    }
+
+    .btn {
+      margin: 35px auto;
+      width: 175px;
+      height: 50px;
+      text-indent: -99999px;
+      background-image: url('./assets/btn.png');
+      /* background-image: url('https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwys3fo4j204v02s74l.jpg'); */
+      background-size: cover;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .btn-cancel {
+      background-position: bottom;
+    }
+
+    .gender-box div {
+      position: relative;
+      padding-left: 35px;
+      display: inline-block;
+      margin-right: 50px;
+    }
+
+    .gender-box div::before {
+      position: absolute;
+      left: 0;
+      display: inline-block;
+      content: '';
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid #000000;
+    }
+
+    .gender-box div.active::before {
+      background-color: brown;
+    }
+  </style>
+</head>
+<body>
+  <div class="root">
+    <div class="result" id="result">
+      <div id="box" class="box">
+        <div id="box-item" class="box-item"></div>
+        <div id="btn-cancel" class="btn btn-cancel">重新测试</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const data = [{
+      name: '玉米',
+      img: './assets/yumi.png',
+      // img: 'https://wx1.sinaimg.cn/mw690/9f7ff7afly1gihwysexomj20gy0jd75b.jpg',
+      description: '玉米是禾本科的一年生草本植物，分布于美国、中国、巴西和其他国家。玉米的物理性状由粒色、粒形、种皮光泽、粒长、粒宽、百粒重、粒径、籽粒均匀程度和硬实率等指标组成。',
+    }, {
+      name: '大豆',
+      img: './assets/dadou.png',
+      // img: 'https://wx2.sinaimg.cn/mw690/9f7ff7afly1gihwys5f3qj20i20i3t8z.jpg',
+      description: '大豆是一年生草本植物，是世界上最重要的豆类，大豆起源于中国。大豆一般都指其种子而言。根据大豆的种子种皮颜色和粒形分为五类：黄大豆、青大豆、黑大豆、其它大豆、饲料豆。',
+    }, {
+      name: '小麦',
+      img: './assets/xiaomai.png',
+      // img: 'https://wx1.sinaimg.cn/mw690/9f7ff7afly1gihwyscg12j20f10f43z4.jpg',
+      description: '小麦是小麦属植物的统称，代表种为普通小麦是禾本科植物，是一种在世界各地广泛种植的谷类作物，小麦的颖果是人类的主食之一，磨成面粉后可制作面包、馒头、饼干、面条等食物，发酵后可制成啤酒、酒精、白酒或生物质燃料。',
+    }, {
+      name: '芝麻',
+      img: './assets/zhima.png',
+      // img: 'https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwysgs7ij20gy0gydg2.jpg',
+      description: '芝麻，被称为八谷之冠。芝麻是一种油料作物，榨取的油称为麻油、胡麻油、香油，特点是气味醇香，生用热用皆可。它遍布世界上的热带地区以及部分温带地区。',
+    }, {
+      name: '绿豆',
+      img: './assets/lvdou.png',
+      // img: 'https://wx4.sinaimg.cn/mw690/9f7ff7afly1gihwys9zlpj20dw0dw0t5.jpg',
+      description: '绿豆是豆科植物绿豆的种子。种子和茎被广泛食用。绿豆清热之功在皮，解毒之功在肉。绿豆汤是家庭常备夏季清暑饮料，清暑开胃，老少皆宜。传统绿豆制品有绿豆糕、绿豆酒、绿豆饼、绿豆沙、绿豆粉皮等。',
+    }, {
+      name: '花生',
+      img: './assets/huasheng.png',
+      // img: 'https://wx2.sinaimg.cn/mw690/9f7ff7afly1gihwys8r3uj20dw0dpgm5.jpg',
+      description: '花生原名落花生，是我国产量丰富、食用广泛的一种坚果。属蔷薇目，豆科一年生草本植物，茎直立或匍匐，长30～80厘米，翼瓣与龙骨瓣分离，荚果长2～5厘米，宽1～1.3厘米，膨胀，荚厚，花果期6～8月。',
+    }]
+
+    const getId = id => document.getElementById(id)
+
+    const queryString = (search = '') => {
+      const query = {}
+      const queryStr = search ? search.substr(1) : window.location.search.substr(1)
+      const vars = queryStr.split('&')
+      vars.forEach((v) => {
+        const pair = v.split('=')
+        if (!query.hasOwnProperty(pair[0])) {
+          //@ts-ignore
+          query[pair[0]] = decodeURIComponent(pair[1])
+          //@ts-ignore
+        } else if (typeof query[pair[0]] === 'string') {
+          //@ts-ignore
+          const arr = [query[pair[0]], decodeURIComponent(pair[1])]
+          //@ts-ignore
+          query[pair[0]] = arr
+        } else {
+          //@ts-ignore
+          query[pair[0]].push(decodeURIComponent(pair[1]))
+        }
+      })
+
+      return query
+    }
+
+    const getResult = (index, name) => {
+      const item = data[index]
+      const content = [
+        `<span>你好${name},下面是你的测试结果</span>`,
+        `<h2>${item.name}</h2>`,
+        `<image class="img" src="${item.img}" />`,
+        `<p>${item.description}</p>`,
+      ]
+      getId('box-item').innerHTML = content.join('')
+    }
+
+    getResult(queryString().index, queryString().name)
+
+    getId('btn-cancel').onclick = function() {
+      window.location.href = './index.html'
+    }
+
+  </script>
+</body>
+</html>
