@@ -64,7 +64,7 @@ $(function(){
         })
     .addPage()
         .addComponent('wenjuan', {
-            html: `<div class="wenjuan"><div class="title"></div>
+            html: `<div><div class="wenjuan"><div class="title"></div>
                 <div class="gender">
                 <span>性别</span>
                 <div class="gender-box">
@@ -76,7 +76,16 @@ $(function(){
                 <span>姓名</span>
                 <input id="name" />
                 </div>
-                <div id="btn" class="btn">开始测试</div></div>`,
+                <div id="btn" class="btn">开始测试</div>
+                </div>
+            </div>
+
+            <div class="result" id="result">
+            <div id="box" class="box">
+                <div id="box-item" class="box-item"></div>
+                <div id="btn-cancel" class="btn btn-cancel">重新测试</div>
+            </div>
+            </div>`,
         })
     .loader([
         '../assets/1.jpg',
