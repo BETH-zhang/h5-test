@@ -81,13 +81,13 @@ var H5 = function(){
 	this.loader = function( firstPage ){
 		this.el.fullpage({
 			onLeave: function(index, nextIndex, direction){
-                // debugger
-                $(this).find('.h5_component').trigger('onLeave');
-            },
-            afterLoad: function(anchorLink, index){
-                // debugger
-                $(this).find('.h5_component').trigger('onLoad');
-            }
+					// debugger
+					$(this).find('.h5_component').trigger('onLeave');
+			},
+			afterLoad: function(anchorLink, index){
+					// debugger
+					$(this).find('.h5_component').trigger('onLoad');
+			}
 		});
 		this.page[0].find('.h5_component').trigger('onLoad');
 		this.el.show();
