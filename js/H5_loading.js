@@ -12,7 +12,9 @@ var H5_loading = function(images, firstPage){
 		for(s in images){
 			var item = images[s];
 			var img = new Image;
+			console.log('img', id, item)
 			img.onload = function(){
+				console.log('img-load', item)
 				window[id].loader();
 			}
 			img.src = item;
