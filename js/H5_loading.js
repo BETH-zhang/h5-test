@@ -22,6 +22,7 @@ var H5_loading = function(images, firstPage){
 		return this;
 
 	}else{
+		console.log(this._loaded)
 		this._loaded ++;
 		$('#rate').text( ((this._loaded / this._images * 100)>>0) + '%' );
 		
@@ -32,6 +33,7 @@ var H5_loading = function(images, firstPage){
 
 	}
 
+	console.log('-----')
 	this.el.fullpage({
 		onLeave: function(index, nextIndex, direction){
             // debugger

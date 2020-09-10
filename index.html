@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 
     <title>节约粮食</title>
-    <style>
+    <!-- <style>
       @font-face {
 	font-family: hanyi_qh95; 
 	src: local('hanyi_qh95'),
@@ -14,8 +14,14 @@
 		url('//font.eqh5.com/fonts/217129189_1598252695000/hanyi_qh95.ttf') format('truetype')
 }
 
-    </style>
+    </style> -->
 
+    <!-- <script type="text/javascript" src="js/lib/vconsole.min.js"></script>
+    <script>
+      if (window.location.href.indexOf('log') > -1) {
+        new VConsole();
+      }
+    </script> -->
     <!-- 载入所有的组件资源 -->
     <script type="text/javascript" src="js/lib/jquery.js"></script>
     <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
@@ -26,7 +32,7 @@
     <script type="text/javascript" src="js/H5.js?t=3"></script>
     <link rel="stylesheet" type="text/css" href="css/H5.css" >
 
-    <script type="text/javascript" src="js/H5_loading.js?t=1"></script>
+    <script type="text/javascript" src="js/H5_loading.js?t=2"></script>
     <link rel="stylesheet" type="text/css" href="css/H5_loading.css" >
 
     <!-- <script type="text/javascript" src="js/H5Content.js"></script> -->
@@ -95,7 +101,7 @@ $(function(){
     h5.whenAddPage = function(){
         this.addComponent('top-bg', {
             center: true,
-            bg: '../assets/top-bg.webp',
+            bg: '../assets/top-bg.png',
             css: {
                 left: 0,
                 top: -143,
@@ -110,7 +116,7 @@ $(function(){
         });
         this.addComponent('bottom-bg', {
             center: true,
-            bg: '../assets/bottom.webp',
+            bg: '../assets/bottom.png',
             css: {
                 opacity: 0,
                 left: 0,
@@ -131,7 +137,7 @@ $(function(){
           center: true,
           width: 255 * 2,
           height: 155 * 2,
-          bg: './assets/p1-1.webp',
+          bg: './assets/p1-1.png',
           css: {top: 40, opacity: 0},
           animateIn: {top: 40, opacity: 1},
           animateOut: {top: -100, opacity: 0},            
@@ -182,7 +188,7 @@ $(function(){
           center: true,
           width: 261 * 2,
           height: 134 * 2,
-          bg: './assets/p2.webp',
+          bg: './assets/p2.png',
           css: {bottom: 0, opacity: 0},
           animateIn: {bottom: 60, opacity: 1},
           animateOut: {bottom: 0, opacity: 0},            
@@ -232,7 +238,7 @@ $(function(){
           center: true,
           width: 250 * 2,
           height: 149 * 2,
-          bg: './assets/p4.webp',
+          bg: './assets/p4.png',
           css: {bottom: 0, opacity: 0},
           animateIn: {bottom: 60, opacity: 1},
           animateOut: {bottom: 0, opacity: 0},            
@@ -256,7 +262,7 @@ $(function(){
           center: true,
           width: 265 * 2,
           height: 125 * 2,
-          bg: './assets/p5.webp',
+          bg: './assets/p5.png',
           css: {bottom: 0, opacity: 0},
           animateIn: {bottom: 60, opacity: 1},
           animateOut: {bottom: 0, opacity: 0},            
@@ -291,14 +297,19 @@ $(function(){
             delay: 600
         })
     .addPage()
-        .addComponent('caption', {
-            text: '节约粮食从一粒种子开始',
+        .addComponent('content4', {
+            html: '<span>节约粮食<br />从一粒种子开始</span>',
             css: {
-              width: '100%',
+              width: '300px',
+            padding: '25px',
+            color: '#fff',
+            fontSize: '35px',
+            fontWeight: 'bolder',
               opacity: 0,
+              textAlign: 'center',
             },
-            animateIn: {opacity: 1, left: '50%'},
-            animateOut: {opacity: 0, left: '-100%'},
+            animateIn: {opacity: 1, top: '45px'},
+            animateOut: {opacity: 0, top: '-1000px'},
             delay: 500
         })
         .addComponent('content4', {
@@ -309,8 +320,9 @@ $(function(){
             padding: '25px',
             color: '#FFC107',
             fontSize: '20px',
+            fontWeight: 'bolder',
           },
-          animateIn: {opacity: 1, top: '55px'},
+          animateIn: {opacity: 1, top: '145px'},
           animateOut: {opacity: 0, top: '-1000px'},
           delay: 500
         })
@@ -321,7 +333,7 @@ $(function(){
           },
           animateIn: {bottom: '60px', opacity: 1},
           animateOut: {bottom: '-1000px', opacity: 0},            
-          delay: 1000,
+          delay: 700,
             html: `<div>
               <div class="gender">
                 <span>性别</span>
@@ -350,18 +362,44 @@ $(function(){
                 <div id="box-item" class="box-item"></div>
             </div>`,
         })
+    .addPage()
+        .addComponent('caption', {
+            text: '关注我们',
+            animateIn: {opacity: 1, left: '50%'},
+            animateOut: {opacity: 0, left: '-100%'},
+            delay: 500
+        })
+        .addComponent('content', {
+          html: '节约粮食，从你我做起',
+          css: {
+            textAlign: 'center'
+          },
+          animateIn: {opacity: 1, top: '55px'},
+            animateOut: {opacity: 0, top: '-100px'},
+            delay: 600
+        })
+        .addComponent('image', {
+          center: true,
+          width: 180 * 2,
+          height: 180 * 2,
+          bg: './assets/qrcode.png',
+          css: {bottom: 0, opacity: 0},
+          animateIn: {bottom: 60, opacity: 1},
+          animateOut: {bottom: 0, opacity: 0},            
+          delay: 1000
+        })
     .loader([
-        '../assets/bg.JPG',
-        '../assets/bg.webp',
-        '../assets/bottom.webp',
-        '../assets/top-bg.webp',
+      './assets/qrcode.png',
+        '../assets/bg.jpg',
+        '../assets/bottom.png',
+        '../assets/top-bg.png',
         '../assets/btn.png',
         '../assets/musicIcon.png',
-        '../assets/p1-1.webp',
+        '../assets/p1-1.png',
         '../assets/p1-2.png',
-        '../assets/p2.webp',
-        '../assets/p4.webp',
-        '../assets/p5.webp',
+        '../assets/p2.png',
+        '../assets/p4.png',
+        '../assets/p5.png',
         '../assets/qrcode.png',
         '../assets/xiaomai.png',
         '../assets/yumi.png',
@@ -373,7 +411,7 @@ $(function(){
 
 })
     </script>
-    <link rel="stylesheet" type="text/css" href="css/H5Content.css?t=5" >
+    <link rel="stylesheet" type="text/css" href="css/H5Content.css?t=6" >
 
     <style>
       .h5_page:nth-child(1) .h5_component_name_top-bg {
@@ -407,7 +445,7 @@ $(function(){
         width: 100%;
         color: #fff;
         padding: 25px;
-        font-size: 14px;
+        font-size: 18px;
       }
 
       .h5_component_name_content1 {
@@ -680,11 +718,14 @@ $(function(){
       description: '花生原名落花生，是我国产量丰富、食用广泛的一种坚果。属蔷薇目，豆科一年生草本植物，茎直立或匍匐，长30～80厘米，翼瓣与龙骨瓣分离，荚果长2～5厘米，宽1～1.3厘米，膨胀，荚厚，花果期6～8月。',
     }]
 
-            window.onload = function() {
-                const getId = id => document.getElementById(id)
+    function getId(id) {
+      return document.getElementById(id)
+    }
                 const random = (max, min) => {
                     return Math.floor(Math.random() * (max - min) + min)
                 }
+
+            const init = function() {
             getId('btn').onclick = function() {
                 const name = getId('name').value
                 if (name) {
@@ -759,6 +800,16 @@ $(function(){
         audioAutoPlay();
     });
             }
+
+            var timer = setInterval(() => {
+              const btn = null
+              console.log('btn: ', btn)
+              if (btn) {
+                init()
+                clearInterval(timer)
+              }
+            }, 1000)
+
         </script>
     </body>
 

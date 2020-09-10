@@ -7,11 +7,11 @@ body{
 .h5_page{
     overflow: hidden;
     background-position: center;
-    background-image: url(../assets/bg.webp);
+    background-image: url(../assets/bg.jpg);
     background-size: inherit;
 }
 .h5_page_face{
-    background-image: url(../assets/bg.webp);
+    background-image: url(../assets/bg.jpg);
 }
 
 @-webkit-keyframes uniformlyRotating {
